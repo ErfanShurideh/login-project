@@ -1,7 +1,6 @@
 export const validate = data => {
 
     const errors = {};
-
     if(!data.name.trim()){
         errors.name = "Name required!"
     } else {
@@ -15,7 +14,6 @@ export const validate = data => {
     }else {
        delete errors.email
     }
-
     if(!data.password){
         errors.password = "Password required!"
     }else if (data.password.length < 6){
@@ -26,7 +24,7 @@ export const validate = data => {
 
     if(!data.confirmPassword){
         errors.confirmPassword = "Confirm your password!"
-    }else if(data.confirmPassword !== password){
+    }else if(data.confirmPassword !== data.password){
         errors.confirmPassword = "Password do not match!"
     }else {
         delete errors.password
