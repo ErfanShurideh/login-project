@@ -1,7 +1,7 @@
 import React , { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Link } from 'react-router-dom';
 import { validate } from './validate';
 import { notify } from './notify';
 
@@ -19,7 +19,7 @@ const SignUp = () => {
 
 
     useEffect (() =>{
-        setErrors (validate(data))
+        setErrors (validate(data , "SignUp"))
     },[data , touched])
 
     const changeHandler = event =>{
@@ -36,7 +36,7 @@ const SignUp = () => {
     const submitHandler = event =>{
         event.preventDefault();
         if (!Object.keys(errors).length){
-            notify("You signed in successfully!" , "success");
+            notify("You signed up successfully!" , "success");
         }else {
             notify("invalid data!" , "error")
             setTouched({
@@ -53,7 +53,7 @@ const SignUp = () => {
 
     return (
         <div className='flex justify-center items-center '>
-            <form className=' text-center border-solid p-8 m-8 bg-slate-50 rounded-lg ' onSubmit={submitHandler}>
+            <form className=' text-center border-solid p-4 m-4 bg-slate-100 rounded-lg ' onSubmit={submitHandler}>
                 <h2 className='p-4 font-bold text-2xl text-blue-500 text-left'>SignUp</h2>
                 <div className='flex flex-col p-4 text-left'>
                     <label>Name</label>
@@ -75,14 +75,16 @@ const SignUp = () => {
                     <input className='border rounded-sm' type='Password' name='confirmPassword' value={data.confirmPassword} onChange ={changeHandler} onFocus={focusHandler}/>
                     {errors.confirmPassword && touched.confirmPassword && <span className='text-red-600 '>{errors.confirmPassword}</span>}
                 </div>
-                <div className='flex flex-row p-10'>
+                <div className='flex flex-col p-10'>
+                    <div className='flex'>
                     <label>I accept terms of privacy policy</label>
                     <input className='border rounded-sm ' type='checkbox' name='isAccepted' value={data.isAccepted} onChange ={changeHandler} onFocus={focusHandler}/>
+                    </div>
                     {errors.isAccepted && touched.isAccepted && <span className='text-red-600 '>{errors.isAccepted}</span>}
                 </div>
                 <div className='flex justify-between'>
-                    <a href='#' className='bg-blue-500 rounded-lg w-14 p-1 text-white font-semibold hover:bg-blue-700 hover:transition-colors'>Login</a>
-                    <button type='submit' className='bg-blue-500 rounded-lg w-20 p-1 text-white font-semibold hover:bg-blue-700 hover:transition-colors'>Sign Up</button>
+                    <Link to='/Login' className=' rounded-lg w-14 p-1 text-blue-500 font-semibold hover:text-blue-700 hover:transition-colors'>Login</Link>
+                    <button type='submit' className='bg-blue-500 rounded-lg w-20 p-2 text-white font-semibold hover:bg-blue-700 hover:transition-colors '>Sign Up</button>
                 </div>
             </form>
             <ToastContainer />
