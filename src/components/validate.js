@@ -30,10 +30,10 @@ export const validate = data => {
         delete errors.password
     }
 
-    if(data.isAccepted){
-        delete errors.isAccepted
-    }else {
+    if(!data.isAccepted){
         errors.isAccepted ="Accept our regulations!"
+    }else {
+        delete errors.isAccepted
     }
 
     return errors
